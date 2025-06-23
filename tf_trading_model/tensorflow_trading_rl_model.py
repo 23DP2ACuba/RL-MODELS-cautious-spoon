@@ -4,12 +4,6 @@ import tensorflow as tf
 import random
 import os
 os.environ["TF_ENABLE_ONEDNN_OPTS"] = "0"
-class DecisionPolicy:
-    def select_action(self, current_state, step):
-        pass
-    
-    def update_q(self, state, action, reward, next_state):
-        pass
 
 class RandomDecisionPolicy(DecisionPolicy):
     def __init__(self, actions):
@@ -62,20 +56,7 @@ class QLearningDecisionPolicy(DecisionPolicy):
         self.model.train_on_batch(state, target_q)
 
 def run_simulation(policy, initial_budget, initial_num_stocks, data, hist):
-    """
-    Run a trading simulation over the given data.
 
-    Parameters:
-    - policy: DecisionPolicy instance (e.g., QLearningDecisionPolicy)
-    - initial_budget: Starting cash amount
-    - initial_num_stocks: Starting number of stocks owned
-    - data: Array of stock prices (e.g., closing prices)
-    - hist: Number of past days to consider in the state
-
-    Returns:
-    - avg: Average total value over the simulation
-    - std: Standard deviation of total value
-    """
     budget = initial_budget
     num_stocks = initial_num_stocks
     share_value = 0
